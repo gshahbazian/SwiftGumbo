@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CGumboParser",
+        "repositoryURL": "https://github.com/gshahbazian/gumbo-parser",
+        "state": {
+          "branch": "master",
+          "revision": "4e07af34f3bfcafa175996bc1a29df0f3af793f4",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
