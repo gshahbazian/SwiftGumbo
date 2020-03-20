@@ -45,6 +45,11 @@ public struct Document {
     public var children: AnyRandomAccessCollection<Node> {
         AnyRandomAccessCollection(Vector(owner: owner, vector: document.children))
     }
+
+    public var doctype: (name: String, publicIdentifier: String, systemIdentifier: String)? {
+        guard document.has_doctype else { return nil }
+        return (name: String(cString: document.name), publicIdentifier: String(cString: document.public_identifier), systemIdentifier: String(cString: document.system_identifier))
+    }
 }
 
 public struct Node: Hashable, VectorElement, CustomDebugStringConvertible {
@@ -485,6 +490,28 @@ public struct Attribute: VectorElement {
 
     public var value: String {
         String(cString: attribute.pointee.value)
+    }
+
+    public enum QuoteType {
+        case singleQuote
+        case doubleQuote
+        case other
+
+        public var character: String {
+            switch self {
+            case .singleQuote: return "\'"
+            case .doubleQuote: return "\""
+            case .other: return ""
+            }
+        }
+    }
+
+    public var quotedBy: QuoteType {
+        switch attribute.pointee.original_value.value.first {
+        case "\'": return .singleQuote
+        case "\"": return .doubleQuote
+        default: return .other
+        }
     }
 }
 
