@@ -5,8 +5,8 @@
         "package": "CGumboParser",
         "repositoryURL": "https://github.com/gshahbazian/gumbo-parser",
         "state": {
-          "branch": "master",
-          "revision": "4e07af34f3bfcafa175996bc1a29df0f3af793f4",
+          "branch": null,
+          "revision": "795de2d0fdd9b58bb8b3e6ef962d718ab055a550",
           "version": null
         }
       }

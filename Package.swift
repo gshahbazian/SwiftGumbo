@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "SwiftGumbo", targets: ["SwiftGumbo"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/gshahbazian/gumbo-parser", .branch("master")),
+        .package(name: "CGumboParser", url: "https://github.com/gshahbazian/gumbo-parser", .revision("795de2d0fdd9b58bb8b3e6ef962d718ab055a550")),
     ],
     targets: [
         .target(name: "SwiftGumbo", dependencies: ["CGumboParser"]),
