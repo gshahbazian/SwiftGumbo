@@ -12,42 +12,40 @@ public protocol QuerySelector {
 public extension Node {
     func findAll(matching: QuerySelector) -> [Node] {
         var matches = [Node]()
-        var alreadyFound = Set<Node>()
+        var queue: [Node] = [self]
 
-        if matching.match(node: self) {
-            matches.append(self)
-            alreadyFound.insert(self)
-        }
+        while !queue.isEmpty {
+            let currentNode = queue.removeFirst()
 
-        switch self.type {
-        case .element(let element):
-            for child in element.children {
-                for match in child.findAll(matching: matching) {
-                    if alreadyFound.contains(match) { continue }
-
-                    matches.append(match)
-                    alreadyFound.insert(match)
-                }
+            if matching.match(node: currentNode) {
+                matches.append(currentNode)
             }
-        default: break
+
+            switch currentNode.type {
+            case .element(let element):
+                queue.append(contentsOf: element.children)
+            default: break
+            }
         }
 
         return matches
     }
 
     func findFirst(matching: QuerySelector) -> Node? {
-        if matching.match(node: self) {
-            return self
-        }
+        var queue: [Node] = [self]
 
-        switch self.type {
-        case .element(let element):
-            for child in element.children {
-                if let match = child.findFirst(matching: matching) {
-                    return match
-                }
+        while !queue.isEmpty {
+            let currentNode = queue.removeFirst()
+
+            if matching.match(node: currentNode) {
+                return currentNode
             }
-        default: break
+
+            switch currentNode.type {
+            case .element(let element):
+                queue.append(contentsOf: element.children)
+            default: break
+            }
         }
 
         return nil
