@@ -110,7 +110,7 @@ public class QueryParser {
 
     private func parseTypeSelector() throws -> QuerySelector {
         let tag = try parseIdentifier()
-        let gumboTag = gumbo_tag_enum(tag)
+        let gumboTag = gumbo_tagn_enum(tag, tag.utf8.count)
         return TagSelector(tag: gumboTag)
     }
 
