@@ -22,7 +22,6 @@ let package = Package(
                 "foreign_attrs.c",
                 "parser.c",
                 "string_buffer.c",
-                "string_piece.c",
                 "svg_attrs.c",
                 "svg_tags.c",
                 "tag_lookup.c",
