@@ -3,8 +3,9 @@
 //  Created by Gabe Shahbazian 2020
 //
 
+import CGumboParser
+import SwiftGumbo
 import XCTest
-@testable import SwiftGumbo
 
 final class SwiftGumboTests: XCTestCase {
     func testParsingDom() {
@@ -199,6 +200,14 @@ final class SwiftGumboTests: XCTestCase {
         XCTAssertEqual(match.count, 4)
     }
 
+    func testMaxTreeDepthOption() {
+        var options = kGumboDefaultOptions
+        options.max_tree_depth = 2
+        let g = SwiftGumbo(html: #"<html><body><h1>node too deep</h1></body></html>"#, options: options)
+
+        XCTAssertEqual(g.status, GUMBO_STATUS_TREE_TOO_DEEP)
+    }
+
     static var allTests = [
         ("testParsingDom", testParsingDom),
         ("testTextContent", testTextContent),
@@ -218,5 +227,6 @@ final class SwiftGumboTests: XCTestCase {
         ("testAttributePrefixSelector", testAttributePrefixSelector),
         ("testGlobalSelector", testGlobalSelector),
         ("testNotSelector", testNotSelector),
+        ("testMaxTreeDepthOption", testMaxTreeDepthOption),
     ]
 }
