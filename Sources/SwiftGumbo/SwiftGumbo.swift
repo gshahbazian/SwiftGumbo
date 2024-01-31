@@ -10,18 +10,22 @@ public class SwiftGumbo {
     private let htmlBuffer: [CChar]
     let gumboOutput: UnsafeMutablePointer<GumboOutput>
 
-    public init(html: String) {
+    public let status: GumboOutputStatus
+
+    public init(html: String, options: GumboOptions = kGumboDefaultOptions) {
         // CGumboParser and the types returned by SwiftGumbo all share the same buffer in memory.
         // The class holds it strongly to ensure it has the same lifetime as the parser.
         let htmlBuffer = html.cString(using: .utf8) ?? []
-        let outputResult = withUnsafePointer(to: kGumboDefaultOptions) { (optionsPointer) -> Result<UnsafeMutablePointer<GumboOutput>, Never> in
-            .success(gumbo_parse_with_options(optionsPointer, htmlBuffer, htmlBuffer.count))
+        let outputResult = withUnsafePointer(to: options) { (optionsPointer) -> UnsafeMutablePointer<GumboOutput> in
+            gumbo_parse_with_options(optionsPointer, htmlBuffer, htmlBuffer.count)
         }
 
         self.htmlBuffer = htmlBuffer
 
         // Safe to force try here since the outputResult only returns success.
-        self.gumboOutput = try! outputResult.get()
+        self.gumboOutput = outputResult
+
+        self.status = outputResult.pointee.status
     }
 
     deinit {
