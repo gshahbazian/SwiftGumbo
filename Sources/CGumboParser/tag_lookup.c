@@ -49,7 +49,7 @@ hash (register const char *str, register size_t len)
       272, 272, 272, 272, 272, 272, 272, 272, 272, 272,
       272, 272, 272, 272, 272, 272, 272, 272, 272
     };
-  register unsigned int hval = len;
+  register unsigned int hval = (unsigned int)len;
 
   switch (hval)
     {

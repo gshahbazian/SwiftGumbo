@@ -4,7 +4,7 @@
 // https://html.spec.whatwg.org/multipage/parsing.html#insertion-mode
 // If new enum values are added, be sure to update the kTokenHandlers
 // dispatch table in parser.c.
-typedef enum {
+typedef enum : size_t {
   GUMBO_INSERTION_MODE_INITIAL,
   GUMBO_INSERTION_MODE_BEFORE_HTML,
   GUMBO_INSERTION_MODE_BEFORE_HEAD,
