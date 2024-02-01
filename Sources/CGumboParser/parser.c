@@ -4495,7 +4495,7 @@ HOT GumboOutput* gumbo_parse_with_options (
         break;
     }
     gumbo_debug (
-      "Handling %s token @%zu:%zu in state %u.\n",
+      "Handling %s token @%zu:%zu in state %zu.\n",
       (char*) token_type,
       token.position.line,
       token.position.column,

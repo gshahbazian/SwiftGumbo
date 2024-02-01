@@ -84,7 +84,7 @@ typedef struct {
  * name. It also has efficiency benefits, by letting the parser work
  * with enums instead of strings.
  */
-typedef enum {
+typedef enum : size_t {
   GUMBO_TAG_HTML,
   GUMBO_TAG_HEAD,
   GUMBO_TAG_TITLE,
