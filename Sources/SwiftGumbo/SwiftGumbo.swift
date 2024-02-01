@@ -19,12 +19,8 @@ public class SwiftGumbo {
         let outputResult = withUnsafePointer(to: options) { (optionsPointer) -> UnsafeMutablePointer<GumboOutput> in
             gumbo_parse_with_options(optionsPointer, htmlBuffer, htmlBuffer.count)
         }
-
         self.htmlBuffer = htmlBuffer
-
-        // Safe to force try here since the outputResult only returns success.
         self.gumboOutput = outputResult
-
         self.status = outputResult.pointee.status
     }
 
